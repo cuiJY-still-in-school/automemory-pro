@@ -1,0 +1,23 @@
+{
+  "name": "AutoMemory Pro",
+  "version": "1.4.0",
+  "description": "让AI真正拥有记忆和智慧的OpenClaw插件。自动记录工具调用、智能提醒、自然语言查询、任务追踪、记忆压缩。",
+  "longDescription": "# AutoMemory Pro 🧠\n\n> 让AI真正拥有\"记忆\"和\"智慧\"的OpenClaw插件\n\n## 核心功能\n\n### 1. 🧠 自动记忆捕获\n每次AI使用工具时自动保存重要信息：\n- 文件创建/修改\n- 命令执行\n- 错误和发现\n- 重要决策\n\n### 2. 🔔 智能提醒系统\n- 逾期任务提醒\n- 定期任务提醒（每天9点检查...）\n- 上下文安全提示\n- 成就系统\n\n### 3. 💬 自然语言查询\n```\n问：\"我昨天做了什么？\"\n答：\"你昨天完成了：1. 注册Fiverr 2. 创建项目计划...\"\n```\n\n### 4. 📋 任务追踪\n自动从TODO提取任务，自动检测完成状态。\n\n### 5. 🗜️ 记忆压缩\n每日/每周/每月摘要，45条记忆 → 1条摘要。\n\n## 安装\n\n```bash\ngit clone https://github.com/cuiJY-still-in-school/automemory-pro.git\ncd automemory-pro\nmkdir -p ~/.openclaw/plugins/automemory\ncp *.py *.json ~/.openclaw/plugins/automemory/\n```\n\n## 使用\n\n```python\nfrom automemory_pro import AutoMemoryPro\n\nplugin = AutoMemoryPro()\n\n# 会话开始 - 自动推荐相关记忆\nplugin.on_session_start({\"session_id\": \"xxx\", \"current_task\": \"继续项目\"})\n\n# 自然语言查询\nfrom natural_query import NaturalQuerySystem\nnq = NaturalQuerySystem()\nnq.ask(\"我昨天做了什么？\")\n```",
+  "author": {
+    "name": "ClawQuant",
+    "github": "cuiJY-still-in-school"
+  },
+  "repository": "https://github.com/cuiJY-still-in-school/automemory-pro",
+  "homepage": "https://github.com/cuiJY-still-in-school/automemory-pro#readme",
+  "tags": [
+    "memory",
+    "ai",
+    "productivity",
+    "automation",
+    "openclaw"
+  ],
+  "license": "MIT",
+  "entry": "automemory_pro.py",
+  "pythonVersion": "3.8",
+  "openClawVersion": ">=1.0.0"
+}
