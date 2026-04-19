@@ -65,10 +65,17 @@ echo "  1) 从 GitHub 克隆 (推荐，可自动更新)"
 echo "  2) 直接下载最新版本"
 echo "  3) 从本地目录安装"
 echo ""
-read -p "请输入选项 (1-3): " choice
+read -r -p "请输入选项 (1-3) [默认1]: " choice
+
+# 默认选择 1
+if [ -z "$choice" ]; then
+    choice="1"
+fi
+
+echo "你选择了: $choice"
 
 case $choice in
-    1)
+    1|one|One|ONE)
         print_info "从 GitHub 克隆..."
         
         # 如果已存在，先备份
@@ -85,6 +92,8 @@ case $choice in
         
         print_success "克隆完成！"
         ;;
+        
+    2|two|Two|TWO)
         
     2)
         print_info "下载最新版本..."
@@ -123,6 +132,8 @@ case $choice in
         
         print_success "下载完成！"
         ;;
+        
+    3|three|Three|THREE)
         
     3)
         print_info "本地安装..."
