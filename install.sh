@@ -119,6 +119,10 @@ case "$1" in
     weekly|report)
         python3 "$PLUGIN_DIR/weekly_report.py"
         ;;
+    export|exp)
+        shift
+        python3 "$PLUGIN_DIR/export.py" "$@"
+        ;;
     status|stat)
         python3 "$PLUGIN_DIR/dashboard.py"
         ;;
