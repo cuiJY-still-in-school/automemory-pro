@@ -112,6 +112,13 @@ case "$1" in
     achievements|achieve)
         python3 "$PLUGIN_DIR/achievements.py"
         ;;
+    remind|reminder)
+        shift
+        python3 "$PLUGIN_DIR/remind.py" "$@"
+        ;;
+    weekly|report)
+        python3 "$PLUGIN_DIR/weekly_report.py"
+        ;;
     status|stat)
         python3 "$PLUGIN_DIR/dashboard.py"
         ;;
