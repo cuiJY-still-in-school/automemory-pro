@@ -123,6 +123,9 @@ case "$1" in
         shift
         python3 "$PLUGIN_DIR/export.py" "$@"
         ;;
+    health|check)
+        python3 "$PLUGIN_DIR/health.py"
+        ;;
     status|stat)
         python3 "$PLUGIN_DIR/dashboard.py"
         ;;
