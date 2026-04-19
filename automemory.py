@@ -18,7 +18,14 @@ from typing import Dict, List, Optional, Any
 import logging
 
 # 设置日志
-logging.basicConfig(level=logging.INFO)
+import logging
+import sys
+
+# 静默日志，只显示警告和错误
+if '--quiet' not in sys.argv and '-q' not in sys.argv:
+    logging.basicConfig(level=logging.INFO, format='%(message)s')
+else:
+    logging.basicConfig(level=logging.WARNING, format='%(message)s')
 logger = logging.getLogger("AutoMemory")
 
 class AutoMemoryPlugin:

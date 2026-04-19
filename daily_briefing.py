@@ -16,7 +16,14 @@ from pathlib import Path
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 
-logging.basicConfig(level=logging.INFO)
+import logging
+import sys
+
+# 静默日志
+if '--quiet' not in sys.argv and '-q' not in sys.argv:
+    logging.basicConfig(level=logging.INFO, format='%(message)s')
+else:
+    logging.basicConfig(level=logging.WARNING, format='%(message)s')
 logger = logging.getLogger("DailyBriefing")
 
 # ============================================================================

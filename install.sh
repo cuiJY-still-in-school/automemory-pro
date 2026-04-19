@@ -96,27 +96,17 @@ case "$1" in
     briefing)
         python3 "$PLUGIN_DIR/daily_briefing.py"
         ;;
-    status)
-        echo "🧠 AutoMemory Pro 状态"
-        echo "======================="
-        echo "安装: $PLUGIN_DIR"
-        MEM_COUNT=$(find "${HOME}/.openclaw/automemory" -name "memories_*.jsonl" 2>/dev/null | wc -l)
-        echo "记忆文件: ${MEM_COUNT} 个"
+    dashboard|dash|board)
+        python3 "$PLUGIN_DIR/dashboard.py"
+        ;;
+    status|stat)
+        python3 "$PLUGIN_DIR/dashboard.py"
         ;;
     update)
         cd "$PLUGIN_DIR" && git pull origin main
         ;;
     *)
-        echo "AutoMemory Pro 命令"
-        echo ""
-        echo "用法: automemory [command]"
-        echo ""
-        echo "命令:"
-        echo "  test      - 运行测试"
-        echo "  demo     - 查看演示"
-        echo "  briefing - 生成简报"
-        echo "  status   - 查看状态"
-        echo "  update   - 更新版本"
+        python3 "$PLUGIN_DIR/dashboard.py"
         ;;
 esac
 EOFBIN
