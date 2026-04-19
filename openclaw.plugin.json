@@ -1,0 +1,36 @@
+{
+  "id": "automemory",
+  "name": "AutoMemory",
+  "version": "1.0.0",
+  "description": "AutoMemory Pro - 让AI真正拥有记忆的OpenClaw插件",
+  "type": "plugin",
+  "author": "ClawQuant",
+  "license": "MIT",
+  "openclaw": {
+    "version": ">=2026.4.0",
+    "api": "1.0"
+  },
+  "entry": "index.js",
+  "permissions": [
+    "memory:read",
+    "memory:write",
+    "session:read",
+    "session:write",
+    "tools:read"
+  ],
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "enabled": {
+        "type": "boolean",
+        "default": true,
+        "description": "启用自动记忆"
+      },
+      "memoryDir": {
+        "type": "string",
+        "default": "~/.openclaw/automemory",
+        "description": "记忆存储目录"
+      }
+    }
+  }
+}
