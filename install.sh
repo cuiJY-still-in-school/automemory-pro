@@ -99,6 +99,9 @@ case "$1" in
     dashboard|dash|board)
         python3 "$PLUGIN_DIR/dashboard.py"
         ;;
+    note)
+        python3 "$PLUGIN_DIR/note.py" "$2" "$3" "$4"
+        ;;
     status|stat)
         python3 "$PLUGIN_DIR/dashboard.py"
         ;;
