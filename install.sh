@@ -4,7 +4,6 @@
 
 set -e
 
-# 颜色定义
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -100,7 +99,18 @@ case "$1" in
         python3 "$PLUGIN_DIR/dashboard.py"
         ;;
     note)
-        python3 "$PLUGIN_DIR/note.py" "$2" "$3" "$4"
+        shift
+        python3 "$PLUGIN_DIR/note.py" "$@"
+        ;;
+    history|hist)
+        python3 "$PLUGIN_DIR/history.py" "$2" "$3"
+        ;;
+    search|find)
+        shift
+        python3 "$PLUGIN_DIR/search.py" "$@"
+        ;;
+    achievements|achieve)
+        python3 "$PLUGIN_DIR/achievements.py"
         ;;
     status|stat)
         python3 "$PLUGIN_DIR/dashboard.py"
@@ -132,10 +142,12 @@ echo ""
 print_info "安装路径: $INSTALL_DIR"
 print_info "记忆目录: ${HOME}/.openclaw/automemory"
 echo ""
-echo "🚀 快速开始:"
-echo "  automemory test      - 测试"
-echo "  automemory demo      - 演示"
-echo "  automemory briefing  - 简报"
-echo "  automemory status    - 状态"
+echo "🚀 快捷命令:"
+echo "  automacity          - 仪表盘"
+echo "  automacity briefing  - 每日简报"
+echo "  automacity note     - 快速笔记"
+echo "  automacity history  - 会话历史"
+echo "  automacity search   - 智能搜索"
+echo "  automacity achieve  - 成就系统"
 echo ""
 print_success "安装成功！🧠"
