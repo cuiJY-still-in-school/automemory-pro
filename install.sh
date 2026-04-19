@@ -130,6 +130,21 @@ case "$1" in
         shift
         python3 "$PLUGIN_DIR/backup.py" "$@"
         ;;
+    tags)
+        shift
+        python3 "$PLUGIN_DIR/tags.py" "$@"
+        ;;
+    cleanup|clean)
+        shift
+        python3 "$PLUGIN_DIR/cleanup.py" "$@"
+        ;;
+    qstat|qs)
+        python3 "$PLUGIN_DIR/qstat.py"
+        ;;
+    api)
+        shift
+        python3 "$PLUGIN_DIR/api.py" "$@"
+        ;;
     status|stat)
         python3 "$PLUGIN_DIR/dashboard.py"
         ;;
@@ -161,11 +176,20 @@ print_info "安装路径: $INSTALL_DIR"
 print_info "记忆目录: ${HOME}/.openclaw/automemory"
 echo ""
 echo "🚀 快捷命令:"
-echo "  automacity          - 仪表盘"
-echo "  automacity briefing  - 每日简报"
-echo "  automacity note     - 快速笔记"
-echo "  automacity history  - 会话历史"
-echo "  automacity search   - 智能搜索"
-echo "  automacity achieve  - 成就系统"
+echo "  automacity              - 仪表盘"
+echo "  automacity briefing     - 每日简报"
+echo "  automacity note         - 快速笔记"
+echo "  automacity history      - 会话历史"
+echo "  automacity search       - 智能搜索"
+echo "  automacity achievements - 成就系统"
+echo "  automacity remind       - 定时提醒"
+echo "  automacity weekly       - 周报生成"
+echo "  automacity export       - 数据导出"
+echo "  automacity health       - 健康检查"
+echo "  automacity backup       - GitHub备份"
+echo "  automacity tags         - 标签管理"
+echo "  automacity cleanup      - 内存清理"
+echo "  automacity qstat        - 快速统计"
+echo "  automacity api          - API服务"
 echo ""
 print_success "安装成功！🧠"
