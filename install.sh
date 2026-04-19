@@ -276,6 +276,23 @@ fi
 
 print_success "快捷命令创建: automemory"
 
+# 创建 OpenClaw Skill 链接
+print_info "创建 OpenClaw Skill..."
+SKILL_DIR="${HOME}/.openclaw/skills/automemory"
+mkdir -p "$SKILL_DIR"
+
+# 复制 Skill 入口文件
+cp "$INSTALL_DIR"/*.py "$SKILL_DIR/" 2>/dev/null || true
+
+# 创建插件链接
+PLUGIN_DEST="${HOME}/.openclaw/plugins/automemory"
+if [ ! -L "$PLUGIN_DEST" ] && [ ! -d "$PLUGIN_DEST" ]; then
+    ln -s "$INSTALL_DIR" "$PLUGIN_DEST"
+    print_success "创建插件链接: $PLUGIN_DEST"
+fi
+
+print_success "OpenClaw Skill 已配置: $SKILL_DIR"
+
 # 测试安装
 echo ""
 print_info "测试安装..."
