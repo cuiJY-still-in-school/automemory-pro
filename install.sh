@@ -126,6 +126,10 @@ case "$1" in
     health|check)
         python3 "$PLUGIN_DIR/health.py"
         ;;
+    backup|bk)
+        shift
+        python3 "$PLUGIN_DIR/backup.py" "$@"
+        ;;
     status|stat)
         python3 "$PLUGIN_DIR/dashboard.py"
         ;;
