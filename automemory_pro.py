@@ -40,6 +40,15 @@ except ImportError:
         def _sanitize_params(self, params): return params
         def _generate_id(self, content): return hashlib.md5(content.encode()).hexdigest()[:16]
 
+try:
+    from smart_reminder import SmartReminder, Reminder, ReminderType, ReminderPriority
+except ImportError:
+    # 如果导入失败，创建占位符
+    SmartReminder = None
+    Reminder = None
+    ReminderType = None
+    ReminderPriority = None
+
 class TaskTracker:
     """任务追踪器 - 自动追踪任务完成状态"""
     
@@ -368,6 +377,12 @@ class AutoMemoryPro(AutoMemoryPlugin):
         self.task_tracker = TaskTracker(self.memory_dir)
         self.memory_recommender = MemoryRecommender(self.memory_dir)
         
+        # 初始化智能提醒系统
+        if SmartReminder:
+            self.smart_reminder = SmartReminder(str(self.memory_dir))
+        else:
+            self.smart_reminder = None
+        
         logger.info("AutoMemory Pro 初始化完成")
     
     def on_session_start(self, session_info: Dict) -> List[Dict]:
@@ -497,6 +512,62 @@ class AutoMemoryPro(AutoMemoryPlugin):
             "summary_text": summary_text,
             "pending_tasks": pending
         }
+    
+    def check_reminders(self, current_tool: str = None) -> Dict[str, List[Reminder]]:
+        """检查所有智能提醒 - 整合到工作流中"""
+        if not self.smart_reminder:
+            return {}
+        
+        # 统计最近完成的任务
+        recent_completed = len([m for m in self.session_memories 
+                               if m.get('completed_tasks')])
+        
+        # 收集最近的错误
+        recent_errors = [m for m in self.session_memories 
+                        if not m.get('success', True)]
+        error_dicts = [{"type": m.get('tool', 'unknown'), "message": m.get('summary', '')}
+                      for m in recent_errors]
+        
+        # 检查所有提醒
+        reminders = self.smart_reminder.check_all_reminders(
+            recent_completed=recent_completed,
+            recent_errors=error_dicts,
+            current_tool=current_tool,
+            context={"session_id": self.session_id}
+        )
+        
+        return reminders
+    
+    def get_reminder_summary(self) -> str:
+        """获取提醒摘要文本"""
+        if not self.smart_reminder:
+            return "智能提醒系统未安装"
+        
+        reminders = self.check_reminders()
+        return self.smart_reminder.get_reminder_summary(reminders)
+    
+    def add_routine_reminder(self, title: str, time: str, description: str = "",
+                           days: List[str] = None) -> str:
+        """添加定期提醒"""
+        if not self.smart_reminder:
+            return ""
+        return self.smart_reminder.add_routine_task(
+            title=title,
+            time=time,
+            description=description,
+            days=days
+        )
+    
+    def add_context_tip(self, trigger: str, tip: str, tool: str = None,
+                       severity: str = "info") -> None:
+        """添加上下文提示"""
+        if self.smart_reminder:
+            self.smart_reminder.add_context_tip(
+                trigger=trigger,
+                tip=tip,
+                tool=tool,
+                severity=severity
+            )
     
     def search_and_recommend(self, query: str, context: Dict = None, limit: int = 5) -> Dict:
         """搜索并推荐记忆"""

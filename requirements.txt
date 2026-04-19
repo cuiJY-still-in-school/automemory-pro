@@ -1,0 +1,32 @@
+# AutoMemory Pro - Python依赖
+# 核心功能使用标准库，无需额外依赖
+
+# 可选依赖，用于增强功能
+# 网络请求 (用于web_fetch记忆分析)
+# requests>=2.28.0
+
+# 数据可视化 (用于visualize.py)
+# matplotlib>=3.5.0
+
+# 高级NLP (用于自然语言查询)
+# 如果需要自然语言查询功能，取消下面的注释
+# openai>=1.0.0
+
+# Web界面 (用于dashboard)
+# 如果需要Web界面，取消下面的注释
+# streamlit>=1.20.0
+# flask>=2.0.0
+
+# 数据库 (用于大规模部署)
+# 如果需要数据库存储，取消下面的注释
+# sqlalchemy>=2.0.0
+# redis>=4.0.0
+
+# 测试
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# 开发工具
+black>=22.0.0
+flake8>=5.0.0
+mypy>=0.990
